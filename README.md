@@ -36,5 +36,3 @@ If you have questions you can look me up on Twitter @mythryll.
 
 My blog is at http://www.mythryll.com/
 
-mail : itheodori@gmail.com
-
