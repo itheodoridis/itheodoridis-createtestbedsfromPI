@@ -21,8 +21,7 @@ def getSimpleDevicesList():
     for entity in r_json['queryResponse']['entity']:
         device = entity["devicesDTO"]
         if (device["reachability"] == "REACHABLE") and (
-        device["productFamily"] == "Switches and Hubs") and (
-        "YPOK" not in device["location"]) and ("nx-os" not in device["softwareType"].lower()):
+        device["productFamily"] == "Switches and Hubs") and ("nx-os" not in device["softwareType"].lower()):
             DeviceList.append(device)
     logging.info(" - Got all devices in list of dictionaries")
     return (DeviceList)
