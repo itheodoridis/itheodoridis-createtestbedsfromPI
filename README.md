@@ -22,6 +22,8 @@ The script runs as any other python script, for example:
 
 <code>python3 CreateTestbeds.py</code>
 
+The python requests library is required to be installed.
+
 # Additional Notes
 
 As the requests are made to the PI REST API, you could of course adapt this to use it with DNA Center, if that is what you use instead of Prime Infrastructure. You can probably find some scripts getting the device list from DNA Center, in several Devnet Learning Labs and Courses, or from Adam Radford, the man himself, in his github repo. I will not link to those repos here.
