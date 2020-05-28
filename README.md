@@ -33,6 +33,8 @@ The reason we made this script is that Prime Infrastructure, unlike a documentat
 If you like PyATS, follow them everywhere (webex teams, Twitter, developer.cisco.com), they are a wonderfull team of gifted human beings.
 
 If you have questions you can look me up on Twitter @mythryll. 
+
 My blog is at http://www.mythryll.com/
+
 mail : itheodori@gmail.com
 
