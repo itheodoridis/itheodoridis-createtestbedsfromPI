@@ -37,6 +37,15 @@ is necessary to include ssh options for old devices that do no support newer key
 
 Like most people playing with REST APIs we used Postman to play with the requests for adjusting the python code. Get it at https://www.postman.com .
 
+# Heads up - Telnet issue
+For some strange reason, although the testbeds are created according to the documentation, connections to telnet only devices sometimes fail when the username prompt comes up. Perhaps they are too old, perhaps it's a buffer issue, I don't know. 
+PyATS support is aware of the issue. If a solution is found, I will update the code accordingly.
+Models that sometimes fail: Cat 2950, 3550, 3750
+
+# Soon to come
+I intend to complete this with one more script that will create the testbeds on the fly, in memory. That means that in order to go ahead and use them, you also need to define some kind of action in the script, like execute a show running-config command. For that to happen you also need to define a testbed name (location) and a device name in the script, so you need to know those before hand. In fact such a script would only serve as an example of creating a testbed in memory from a dict, like it's described in this page:
+https://pubhub.devnetcloud.com/media/genie-docs/docs/cookbooks/genie.html#create-a-testbed-from-a-dictionary 
+
 # Cisco Prime Infrastructure API
 You can find a downloadable programmaing guide for all active Cisco Prime Infrastructure versions in this page:
 https://www.cisco.com/c/en/us/support/cloud-systems-management/prime-infrastructure/products-programming-reference-guides-list.html
