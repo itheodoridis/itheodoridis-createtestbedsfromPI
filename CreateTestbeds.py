@@ -7,11 +7,14 @@ import yaml
 from credentials import dev_username, dev_password, dev_enablepass
 from primeapidata import PI_ADDRESS, USERNAME, PASSWORD
 
+# this line is used to get rid of the fact that your server probably has a self signed certificate that you can't verify in code.
 requests.packages.urllib3.disable_warnings()
 
+# this line as well as the other logging commands create logs to help you verify what the code did. They are not necessary and can be removed from the code (don't forget to remove all instances)
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     filename='CreateTestbeds.log', level=logging.INFO)
 
+# this function gets the list of devices from prime infrastructure as a list of dictionaries.
 def getSimpleDevicesList():
     DeviceList = []
     logging.info(" - Getting all devices url list")
@@ -20,12 +23,14 @@ def getSimpleDevicesList():
     r_json = response.json()
     for entity in r_json['queryResponse']['entity']:
         device = entity["devicesDTO"]
+        # this if block limits devices to reachable only, switches and excludes NXOS devices
         if (device["reachability"] == "REACHABLE") and (
         device["productFamily"] == "Switches and Hubs") and ("nx-os" not in device["softwareType"].lower()):
             DeviceList.append(device)
     logging.info(" - Got all devices in list of dictionaries")
     return (DeviceList)
 
+# this creates a list of the separate locations defined in prime infrastructure for the devices already in the list of devices.
 def getLocationsList(DevList):
     logging.info(" - Getting all different locations")
     LocationsList = []
@@ -37,25 +42,29 @@ def getLocationsList(DevList):
     return(LocationsList)
 # End of Function
 
+# this functions creates the testbeds in files per location (one testbed for each location defined in the previous function).
 def createTestbeds(DevList, LocList):
     Devs_per_loc = dict()
     for location in LocList:
         Devs_per_loc[location] = []
 
+    # define protocol  for each device depending on version and rest of details
     for device in DevList:
         location = device["location"].strip()
-        if "2950" in device["deviceType"]:
+        if ("2950" in device["deviceType"]) or ("3550" in device["deviceType"]):
             deviceProtocol = "telnet"
             devicePort = "23"
             deviceName = device["deviceName"]
         else:
             deviceProtocol = "ssh"
             devicePort = "22"
+            # the following line is necessary to get rid of the domain suffix or PyATS will not recognize the device hostname
             divdevname = device["deviceName"].split(".")
             deviceName = divdevname[0]
         deviceIpAddress = device["ipAddress"]
         deviceOS = device["softwareType"].lower()
 
+        # define dict to contain device parameters and add to the list
         devdict = {
             "deviceName" : deviceName,
             "os" : deviceOS,
@@ -68,16 +77,19 @@ def createTestbeds(DevList, LocList):
 
     logging.info(" - Creating Testbeds")
     for location in LocList:
+        #this is the initial testbed block - this is actually optional
         initial_string = (f"testbed:\n"
                           f"  name: {location}\n"
                           f"  credentials:\n"
                           f"    default:\n"
                           f"      username: {dev_username}\n"
                           f"      password: {dev_password}\n"
-                          f"      enable:\n"
-                          f"        password: {dev_enablepass}\n")
+                          f"    enable:\n"
+                          f"      password: {dev_enablepass}\n")
 
+        # testbed filename definition
         testbed_filename = location + ".yaml"
+        # open filename and write testbed and devices blocks
         with open(testbed_filename, 'w') as writer:
             writer.write(initial_string)
             writer.write("\ndevices:\n")
@@ -90,8 +102,9 @@ def createTestbeds(DevList, LocList):
                 writer.write(" "*8 + "ip: " + device["ip"] + "\n")
                 writer.write(" "*8 + "protocol: " + device["protocol"] + "\n")
                 writer.write(" "*8 + "port: " + device["port"] + "\n")
+                # this was necessary for some of our old devices, using the latest version of the PyATS docker container
                 if device["protocol"]=="ssh":
-                  writer.write(" "*8 + "ssh_options: -o KexAlgorithms=+diffie-hellman-group1-sha1\n")
+                  writer.write(" "*8 + "ssh_options: -o KexAlgorithms=+diffie-hellman-group1-sha1 -c aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc\n")
     return
 # End of function
 
