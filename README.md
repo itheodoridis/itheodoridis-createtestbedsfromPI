@@ -7,7 +7,7 @@ The initial code that contains the idea of querrying an Enterprise's Prime Infra
 - https://github.com/kdardoufa/DeviceInfo_from_PI
 - https://github.com/kdardoufa/CollectIP
 
-The code in this repo is purposed for creating Cisco PyATS testbeds for active network devices per location. It's limited for switches as Device Type but it can easily be adjusted to include other types. It has adjustments compared to the initial code created by Katerina Darfoufa in order to querry the PI server for a full device list directly, instead of going through the device groups, as the main goal is speed.
+The code in this repo is purposed for creating Cisco PyATS testbeds for active network devices per location. It's limited for switches as Device Type but it can easily be adjusted to include other types. It has adjustments compared to the initial code created by Katerina Dardoufa in order to querry the PI server for a full device list directly, instead of going through the device groups, as the main goal is speed.
 
 Indeed the code should complete a full run in a few seconds for a few hundreds of devices.
 
@@ -24,6 +24,23 @@ The script runs as any other python script, for example:
 
 The python requests library is required to be installed.
 
+# Code adjustments
+The code contains certain criteria for the search that you might want to adjust.
+- Active only devices
+- Type "Switches and Hubs" : You have to check the supported types/groups in Prime and choose the ones you want, or eliminate the criteria to get eveyrything. But be mindfull. Prime Infrastructure doesn't always recognize equipment as you would like it to, for example some router models or Cisco ISE. You really don't want any type of device in your testbeds and the ones you do want in, better be of the correct type!
+- only IOS devices, not nxos. Again this is something you need to figure out for your topology. If you have nexus switches all over your network than by all means, don't exclude them but you need to take this into account when you map the devices to PyATS device types (os, models, series, etc).
+- In the original code I would limit the devices to main sites only, not branches. You can add criteria to the if statement or substract from it to adjust the result.
+
+Like most people playing with REST APIs we used Postman to play with the requests for adjusting the python code. Get it at https://www.postman.com .
+
+# Cisco Prime Infrastructure API
+You can find a downloadable programmaing guide for all active Cisco Prime Infrastructure versions in this page:
+https://www.cisco.com/c/en/us/support/cloud-systems-management/prime-infrastructure/products-programming-reference-guides-list.html
+
+There is also live documentation. If you want to start from there, go to https://developer.cisco.com/site/prime-infrastructure/
+Also check the tutorial at https://developer.cisco.com/site/prime-infrastructure/documents/api-reference/tutorial/ 
+You can also check the API in your own server by appending /webacs/api/v4/ to your server https url (notice the version, some api calls are version dependant, v1 is depricated but v2 is very much in use).
+
 # Additional Notes
 
 As the requests are made to the PI REST API, you could of course adapt this to use it with DNA Center, if that is what you use instead of Prime Infrastructure. You can probably find some scripts getting the device list from DNA Center, in several Devnet Learning Labs and Courses, or from Adam Radford, the man himself, in his github repo. I will not link to those repos here.
@@ -35,4 +52,6 @@ If you like PyATS, follow them everywhere (webex teams, Twitter, developer.cisco
 If you have questions you can look me up on Twitter @mythryll. 
 
 My blog is at http://www.mythryll.com/
+
+This is not an example for proper REST API usage. You can find plenty of courses out there to teach you just that, a lot in Cisco Devnet Learning Paths as well, at https://developer.cisco.com/
 
