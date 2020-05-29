@@ -31,6 +31,10 @@ The code contains certain criteria for the search that you might want to adjust.
 - We include only IOS devices, not nxos. Again this is something you need to figure out for your topology. If you have nexus switches all over your network than by all means, don't exclude them but you need to take this into account when you map the devices to PyATS device types (os, models, series, etc).
 - In the original code I would limit the devices to main sites only, not branches. You can add criteria to the if statement or substract from it to adjust the result.
 
+the line 
+<code> writer.write(" "*8 + "ssh_options: -o KexAlgorithms=+diffie-hellman-group1-sha1 -c aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc\n") </code>
+is necessary to include ssh options for old devices that do no support newer key exchange algorithms and ciphers. It's an linux machine to network device issue, one side is a lot newer than the other (network), it's managed either like any other linux machine (e.g.defining ssh options per host in the .ssh/config file) or at the command line. PyATS offers the capability to define those in the testbed file. This what we do here. If you have newer devices this line may need to be removed or adjusted (if your devices support other algorithms and ciphers).
+
 Like most people playing with REST APIs we used Postman to play with the requests for adjusting the python code. Get it at https://www.postman.com .
 
 # Cisco Prime Infrastructure API
