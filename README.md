@@ -26,9 +26,9 @@ The python requests library is required to be installed.
 
 # Code adjustments
 The code contains certain criteria for the search that you might want to adjust.
-- Active only devices
-- Type "Switches and Hubs" : You have to check the supported types/groups in Prime and choose the ones you want, or eliminate the criteria to get eveyrything. But be mindfull. Prime Infrastructure doesn't always recognize equipment as you would like it to, for example some router models or Cisco ISE. You really don't want any type of device in your testbeds and the ones you do want in, better be of the correct type!
-- only IOS devices, not nxos. Again this is something you need to figure out for your topology. If you have nexus switches all over your network than by all means, don't exclude them but you need to take this into account when you map the devices to PyATS device types (os, models, series, etc).
+- Active only devices are included ("reachable" is the term used with PI)
+- Type is "Switches and Hubs" : You have to check the supported types/groups in Prime and choose the ones you want, or eliminate the criteria to get eveyrything. But be mindfull. Prime Infrastructure doesn't always recognize equipment as you would like it to, for example some router models or Cisco ISE. You really don't want any type of device in your testbeds and the ones you do want in, better be of the correct type!
+- We include only IOS devices, not nxos. Again this is something you need to figure out for your topology. If you have nexus switches all over your network than by all means, don't exclude them but you need to take this into account when you map the devices to PyATS device types (os, models, series, etc).
 - In the original code I would limit the devices to main sites only, not branches. You can add criteria to the if statement or substract from it to adjust the result.
 
 Like most people playing with REST APIs we used Postman to play with the requests for adjusting the python code. Get it at https://www.postman.com .
