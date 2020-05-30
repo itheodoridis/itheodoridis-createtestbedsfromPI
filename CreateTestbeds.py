@@ -1,3 +1,14 @@
+"""
+Create testbeds for Cisco PyATS from device groups (e.g. switches) managed by Cisco Prime Infrastructure The code in this repo is the result of common work from Ioannis Theodoridis and Katerina Dardoufa (https://github.com/kdardoufa), engineers, co-workers, and friends. The original code that contains the idea of querrying an Enterprise's Prime Infrastrcture server for active network devices so that the device list and attributes can be used for various purposes, is contained in two different repositories created by Katerina Dardoufa at:
+
+    https://github.com/kdardoufa/DeviceInfo_from_PI
+    https://github.com/kdardoufa/CollectIP
+
+The code in this repo is purposed for creating Cisco PyATS testbeds for active network devices per location. It's limited for switches as Device Type but it can easily be adjusted to include other types. It has adjustments compared to the initial code created by Katerina Dardoufa in order to querry the PI server for a full device list directly, instead of going through the device groups, as the main goal is speed.
+
+Indeed the code should complete a full run in a few seconds for a few hundreds of devices.
+"""
+
 import requests
 import json
 import logging
