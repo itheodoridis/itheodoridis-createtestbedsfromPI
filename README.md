@@ -47,7 +47,7 @@ I intend to complete this with one more script that will create the testbeds on 
 https://pubhub.devnetcloud.com/media/genie-docs/docs/cookbooks/genie.html#create-a-testbed-from-a-dictionary 
 
 # Cisco Prime Infrastructure API
-You can find a downloadable programmaing guide for all active Cisco Prime Infrastructure versions in this page:
+You can find a downloadable programming guide for all active Cisco Prime Infrastructure versions in this page:
 https://www.cisco.com/c/en/us/support/cloud-systems-management/prime-infrastructure/products-programming-reference-guides-list.html
 
 There is also live documentation. If you want to start from there, go to https://developer.cisco.com/site/prime-infrastructure/
