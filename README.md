@@ -71,4 +71,5 @@ This is not an example for proper REST API usage. You can find plenty of courses
 
 # Cisco Developer Code Exchange
 This repo has been submited to the Cisco Developer Code Exchange.
+
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/itheodoridis/itheodoridis-createtestbedsfromPI)
