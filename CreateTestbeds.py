@@ -62,7 +62,7 @@ def createTestbeds(DevList, LocList):
     # define protocol  for each device depending on version and rest of details
     for device in DevList:
         location = device["location"].strip()
-        if ("2950" in device["deviceType"]) or ("3550" in device["deviceType"]):
+        if ("2950" in device["deviceType"]) or ("3550" in device["deviceType"]) or ("3750" in device["deviceType"]):
             deviceProtocol = "telnet"
             devicePort = "23"
             deviceName = device["deviceName"]
@@ -116,6 +116,16 @@ def createTestbeds(DevList, LocList):
                 # this was necessary for some of our old devices, using the latest version of the PyATS docker container
                 if device["protocol"]=="ssh":
                   writer.write(" "*8 + "ssh_options: -o KexAlgorithms=+diffie-hellman-group1-sha1 -c aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc\n")
+                if device["protocol"]=="telnet":
+                    writer.write(" "*8 + "settings:\n")
+                    writer.write(" "*10 + "ESCAPE_CHAR_CHATTY_TERM_WAIT: 0.4\n")
+                    writer.write(" "*10 + "ESCAPE_CHAR_PROMPT_WAIT: 0.4\n")
+                    writer.write(" "*4 + "credentials:\n")
+                    writer.write(" "*6 + "default:\n")
+                    writer.write(" "*8 + f"username: {dev_username}\n")
+                    writer.write(" "*8 + f"password: {dev_password}\n")
+                    writer.write(" "*6 + "enable:\n")
+                    writer.write(" "*8+ f"password: {dev_password}\n")
     return
 # End of function
 
