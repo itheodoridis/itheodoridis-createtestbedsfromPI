@@ -37,10 +37,11 @@ is necessary to include ssh options for old devices that do no support newer key
 
 Like most people playing with REST APIs we used Postman to play with the requests for adjusting the python code. Get it at https://www.postman.com .
 
-# Heads up - Telnet issue
-For some strange reason, although the testbeds are created according to the documentation, connections to telnet only devices sometimes fail when the username prompt comes up. Perhaps they are too old, perhaps it's a buffer issue, I don't know. 
-PyATS support is aware of the issue. If a solution is found, I will update the code accordingly.
-Models that sometimes fail: Cat 2950, 3550, 3750
+# Telnet issue
+For some strange reason, although the testbeds were created according to the documentation, connections to telnet only devices sometimes failed when the username prompt comes up. Perhaps they are too old, perhaps it's a buffer issue, I don't know. 
+PyATS support was notidied of the issue. They responded with a solution so I updated the code accordingly.
+Models that sometimes failed: Cat 2950, 3550, 3750. Now they work with timers of 0.4.
+The could use some optimization at some point where it checks whether the model is one of the telnet only ones.
 
 # Soon to come
 I intend to complete this with one more script that will create the testbeds on the fly, in memory. That means that in order to go ahead and use them, you also need to define some kind of action in the script, like execute a show running-config command. For that to happen you also need to define a testbed name (location) and a device name in the script, so you need to know those before hand. In fact such a script would only serve as an example of creating a testbed in memory from a dict, like it's described in this page:
