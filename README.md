@@ -39,7 +39,7 @@ Like most people playing with REST APIs we used Postman to play with the request
 
 # Telnet issue
 For some strange reason, although the testbeds were created according to the documentation, connections to telnet only devices sometimes failed when the username prompt comes up. Perhaps they are too old, perhaps it's a buffer issue, I don't know. 
-PyATS support was notidied of the issue. They responded with a solution so I updated the code accordingly.
+PyATS support was notified of the issue. They responded with a solution so I updated the code accordingly (added a little delay of 0.4 seconds for telnet devices).
 Models that sometimes failed: Cat 2950, 3550, 3750. Now they work with timers of 0.4.
 The code could use some optimization at some point where it checks whether the model is one of the telnet only ones.
 
