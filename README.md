@@ -13,6 +13,8 @@ Indeed the code should complete a full run in a few seconds for a few hundreds o
 
 The repo will soon be completed with a second script using the same technique to create the testbeds in memory using existing functions from the createtestbeds.py. This is usefull if you need to do something quickly in a script, without worrying about accessing disk/file locations.
 
+<img src="ciscopipyats.jpg" raw=true alt="Cisco PI - PyATS Diagram">
+
 # Installation - Configuration
 
 To install just clone this repository and replace the values in the credentials.py file, as well as the location of your prime infrastructure and credentials in the primeapidata.py file.
