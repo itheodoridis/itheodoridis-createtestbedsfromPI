@@ -22,7 +22,7 @@ The script runs as any other python script, for example:
 
 <code>python3 CreateTestbeds.py</code>
 
-The python requests library is required to be installed.
+The python requests library is required to be installed. You can do that with <br><code>pip install requests</code>
 
 # Code adjustments
 The code contains certain criteria for the search that you might want to adjust.
